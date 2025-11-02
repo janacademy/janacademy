@@ -1,12 +1,21 @@
 import { getAllCourses, getCourseBySlug } from "../../lib/course";
-import { Box, Container, Typography, Button, Chip } from "@mui/material";
+import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  Chip,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Head from "next/head";
 
 export default function CourseDetail({ course }) {
   const router = useRouter();
-
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   if (router.isFallback) {
     return (
       <Container maxWidth="lg">
@@ -43,7 +52,7 @@ export default function CourseDetail({ course }) {
               playsInline
               sx={{
                 width: "100%",
-                height: "400px",
+                height: isMobile ? "100%" : "400px",
                 objectFit: "cover",
                 borderRadius: "8px",
               }}
