@@ -11,7 +11,7 @@ export default function Home() {
         <title>Jan Academy</title>
         <meta name="description" content="Home Page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/JAN Academy Logo.png" />
+        <link rel="icon" href="/favicon-v2.ico" />
       </Head>
 
       <main styles={{ paddingTop: "20px" }}>

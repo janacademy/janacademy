@@ -38,7 +38,7 @@ export default function CourseDetail({ course }) {
         <title>Jan Academy - Course Detail Page</title>
         <meta name="description" content="Course Page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/images/JAN Academy Logo.png" />
+        <link rel="icon" href="/favicon-v2.ico" />
       </Head>
       <Box component={"section"} sx={{ p: "20px" }}>
         <Container maxWidth="lg">
