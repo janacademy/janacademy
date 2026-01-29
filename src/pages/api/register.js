@@ -1,24 +1,15 @@
-import dbConnect from "../../utils/db";
-import Register from "../../models/Register";
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Only POST method allowed" });
   }
 
   try {
-    await dbConnect();
-
     const { name, email, phoneNumber, course } = req.body.formData;
 
-    const newEntry = await Register.create({
-      name,
-      email,
-      phoneNumber: phoneNumber,
-      course,
-    });
     // 📩 Send Email To Admin
     await resend.emails.send({
       from: "Jan Academy <onboarding@resend.dev>",
@@ -34,21 +25,15 @@ export default async function handler(req, res) {
         <p>Regards,<br/>Jan Academy Registration System</p>
       `,
     });
+
     return res.status(201).json({
       message: "✅ Registration Successful!",
-      data: newEntry,
     });
   } catch (error) {
-    console.error("Error creating entry:", error);
-
-    if (error.code === 11000) {
-      return res.status(400).json({
-        error: "❌ Email or Phone already exists!",
-      });
-    }
+    console.error("Error sending registration:", error);
 
     return res.status(500).json({
-      error: "❌ Something went wrong",
+      error: "❌ Failed to submit registration",
     });
   }
 }
